@@ -89,3 +89,19 @@ Pleos Connect 에뮬레이터의 Virtual Console(HTTP API)로 차량 신호를 �
 - 음성 타임아웃은 끝 신호가 없는 경우라 실제로는 재생됐어도 실패로 셀 수 있습니다.
 - 에뮬레이터는 차속 권한이 없어 정차·주행을 기어로 판정합니다.
 - 쓰기 마지막에 읽는 값이 늦게 반영되는 차에서는 재연결 뒤 창문 확인이 "위치 그대로"로 보일 수 있습니다.
+
+## 라이선스·출처
+
+- 이 저장소의 소스 코드와 문서는 공모전 출품작이며, 별도 라이선스를 붙이지 않았습니다(저작권은 출품팀에 있음). 심사·열람 목적의 공개입니다.
+- 날씨 정보: **기상청 단기예보 조회서비스(공공데이터포털)** 자료를 사용합니다. 출처: 기상청. 공공누리 출처표시 조건에 따릅니다.
+- Pleos Connect SDK(Vehicle 2.3.2, TextToSpeech 3.3.1)는 저장소에 포함하지 않고 Pleos Playground Maven 저장소에서 받습니다. 이용 조건은 Pleos Playground 안내를 따릅니다.
+- 사용한 오픈소스(빌드 때 Maven에서 받음, 저장소에는 미포함)
+
+| 라이브러리 | 라이선스 |
+|---|---|
+| AndroidX (core-ktx, lifecycle, activity-compose), Jetpack Compose (ui, material3) | Apache License 2.0 |
+| Kotlin 표준 라이브러리, kotlinx.coroutines | Apache License 2.0 |
+| Gradle Wrapper (`gradle/wrapper/gradle-wrapper.jar`) | Apache License 2.0 |
+| JUnit 4 (테스트 전용, APK에 들어가지 않음) | Eclipse Public License 1.0 |
+
+- 앱 아이콘(좌석+사람)과 알림 아이콘은 직접 그린 벡터입니다. 글꼴은 시스템 기본 글꼴만 씁니다. 음원·효과음은 없습니다(안내 음성은 Pleos TTS가 생성).
