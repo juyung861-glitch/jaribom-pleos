@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 날씨(기상청 단기예보) 호출용 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 화면 없이 백그라운드에서 탑승·하차를 감지하고, 시동 직후 자동 시작 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 하차 정리 결과를 시스템 알림으로 남김 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!--
+      Android 기본 TTS(mock 플레이버, Pleos TTS 실패 시 대체)가 엔진을 찾으려면 필요하다.
+      targetSdk 30+ 패키지 가시성 규칙 때문에 이 선언이 없으면 TextToSpeech 초기화가 실패한다.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JariBom">
+
+        <!-- 로터리 컨트롤러(CCP) 미지원. user-installed 앱은 선택이며, 모든 조작은 터치로 끝난다(Pleos CCP 가이드). -->
+        <meta-data android:name="com.hmg.rotary.ROTARY_SUPPORTED" android:value="false" />
+
+        <!--
+          설정 화면 한 장(챙길 물건·관리할 좌석·무음).
+          DO(distractionOptimized)를 선언하지 않는다(A안): 주행 중에는 시스템이 이 화면을 막고, 정차 중에만 열린다.
+          Pleos 가이드상 DO 를 선언하면 CarUxRestrictionsManager 로 규제를 직접 확인해야 하는데, 지금은 기어로만 판정하므로 뺐다.
+          B안(추후): DO 를 다시 선언하고 CarUxRestrictionsManager 로 NO_SETUP 을 받아 DrivingLock 을 띄운다.
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".routine.JariBomService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Detects passenger boarding and alighting from vehicle seat, belt and door signals, then tidies the seat after the passenger leaves (closes the window, turns off seat heater and ventilation)." />
+        </service>
+
+        <receiver
+            android:name=".routine.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".routine.NotificationActionReceiver"
+            android:exported="false" />
+    </application>
+</manifest>

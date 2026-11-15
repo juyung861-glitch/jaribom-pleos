@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 자체 제작 아이콘: 좌석(둥근 사각형) 위에 점 하나(사람) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#FF4A6FA5"
+        android:pathData="M34,44 h40 a6,6 0 0 1 6,6 v26 a6,6 0 0 1 -6,6 h-40 a6,6 0 0 1 -6,-6 v-26 a6,6 0 0 1 6,-6 z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M54,30 m-9,0 a9,9 0 1 0 18,0 a9,9 0 1 0 -18,0" />
+</vector>

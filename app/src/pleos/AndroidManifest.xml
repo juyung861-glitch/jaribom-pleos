@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      Pleos Vehicle SDK 권한 (pleos 플레이버만). 이름은 SDK 2.3.2 의 PleosPermission 상수와 같다.
+      개발 단계에서는 선언만 하면 에뮬레이터에서 호출 가능. App Market 배포 심사 때 승인 필요.
+      CAR_* = 읽기, CONTROL_CAR_* = 쓰기. 제어는 동승자 좌석 하차 정리(창문 닫기·열선·통풍 끄기)와 탑승 프리셋에만 쓴다.
+      쓰기 권한은 창문(CONTROL_CAR_WINDOWS)과 시트 열선·통풍(CONTROL_CAR_SEATS, SDK 의 @RequiresPermission 기준) 둘뿐이다.
+      CAR_CLIMATE 는 실내 온도 읽기용이다. 공조 쓰기(CONTROL_CAR_CLIMATE)는 쓰지 않아 선언하지 않는다.
+      운전 기능·도어 열림/닫힘(잠금·차일드락 포함)은 앱에 제어 능력이 없다. 권한·명령·호출을 추가하지 않는다
+      (CAR_DOORS·CAR_DRIVE 는 문 열림·기어 "읽기" 권한이다).
+      운전석 창문/시트는 설계상 절대 제어하지 않는다(권한이 있어도 SafetyGate 에서 막음).
+    -->
+    <uses-permission android:name="pleos.car.permission.CAR_SEATS" />
+    <uses-permission android:name="pleos.car.permission.CAR_SAFETY" />
+    <uses-permission android:name="pleos.car.permission.CAR_DOORS" />
+    <uses-permission android:name="pleos.car.permission.CAR_WINDOWS" />
+    <uses-permission android:name="pleos.car.permission.CAR_CLIMATE" />
+    <uses-permission android:name="pleos.car.permission.CAR_DRIVE" />
+    <uses-permission android:name="pleos.car.permission.CONTROL_CAR_WINDOWS" />
+    <uses-permission android:name="pleos.car.permission.CONTROL_CAR_SEATS" />
+    <!-- TTS(온디바이스) -->
+    <uses-permission android:name="pleos.car.permission.TTS_SERVICE" />
+    <!--
+      AAOS android.car 읽기 권한(6차 F6, 쓰기 없음). 차속 PERF_VEHICLE_SPEED 를 읽고 구독한다.
+      거부되면 속도는 null 이 되고 정차 판정은 기어로 떨어진다. VehicleCapabilityTest 의 읽기 권한 허용 목록에 있다.
+    -->
+    <uses-permission android:name="android.car.permission.CAR_SPEED" />
+    <!-- 기어 GEAR_SELECTION 읽기(F6-2). Pleos SDK 의 deprecated 기어 API 대신 쓴다. 쓰기 아님. -->
+    <uses-permission android:name="android.car.permission.CAR_POWERTRAIN" />
+
+    <application>
+        <uses-library android:name="android.car" android:required="false" />
+    </application>
+</manifest>
