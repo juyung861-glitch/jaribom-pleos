@@ -64,7 +64,7 @@ android {
             isDebuggable = false
             if (releaseStore != null) signingConfig = signingConfigs.getByName("release")
             optimization {
-                enable = true
+                enable = false   // 2026-11-15: R8 최적화가 kotlin stdlib 클래스를 옮겨 실행 시 IllegalAccessError 크래시 → 끔
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
         }

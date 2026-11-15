@@ -6,9 +6,10 @@
 > - 버전: 1.0.0 (versionCode 3)
 > - APK: [`apk/자리봄팀_자리봄_release.apk`](apk/) (release 빌드)
 > - 테스트 환경: Pleos Connect 에뮬레이터 v2.1.0 (Android 14, API 34) + Pleos Connect Virtual Console, Pleos SDK 2.3.2, minSdk 28
-> - 화면 규격: (에뮬레이터 화면 해상도 기입 예정)
+> - 화면 규격: 2560x1440, 160dpi (`adb shell wm size` / `wm density`, Pleos Connect v2.1.0 AVD)
 > - 실행 방법: 에뮬레이터를 켠 뒤 `adb install -r -t --user 10 apk/자리봄팀_자리봄_release.apk` → 앱 실행 → 속도 권한 허용 → 설정에서 키즈락 좌석·챙길 물건 지정 → Virtual Console로 신호 입력(아래 "에뮬레이터 시연" 참고)
-> - 필요한 설정: 날씨 안내를 쓰려면 빌드 때 `local.properties`에 `KMA_SERVICE_KEY`(기상청 단기예보 API 키)를 넣습니다. 키가 없어도 다른 기능은 모두 동작합니다.
+> - 필요한 설정: 날씨 안내를 쓰려면 빌드 때 `local.properties`에 `KMA_SERVICE_KEY`(기상청 단기예보 API 키)를 넣습니다. 제출한 APK는 키 없이 빌드해 날씨 조건(비·추위 안내)은 건너뛰고, 나머지 기능은 모두 동작합니다.
+> - APK SHA-256: `044cacea81479de16bec72381336da8558e3119330e5fedb97f03942afd366bb` (서명 인증서 CN=JariBom Team)
 
 동승자가 내리면 그 좌석을 대신 정리하고, 두고 내린 물건을 놓치지 않게 알려 주는 차량용 앱입니다. 운전자는 화면을 보지 않고도 "누가 탔고, 무엇이 정리됐는지"를 말과 알림으로 받습니다.
 
